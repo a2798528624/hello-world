@@ -1,9 +1,9 @@
 package server
 
 import (
+	"giligili/api"
+	"giligili/middleware"
 	"os"
-	"singo/api"
-	"singo/middleware"
 
 	"github.com/gin-gonic/gin"
 )
@@ -27,6 +27,21 @@ func NewRouter() *gin.Engine {
 
 		// 用户登录
 		v1.POST("user/login", api.UserLogin)
+
+		//视频投稿（创建视频）
+		v1.POST("videos", api.CreateVideo)
+
+		//获取单个视频
+		v1.GET("videos/:id", api.ShowVideo)
+
+		//获取全部视频
+		v1.GET("videos", api.ListVideo)
+
+		//更新单个视频
+		v1.PUT("videos/:id", api.UpdateVideo)
+
+		//删除单个视频
+		v1.DELETE("videos/:id", api.DeleteVideo)
 
 		// 需要登录保护的
 		auth := v1.Group("")
